@@ -1,0 +1,448 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Manrope:wght@300;400;500;600;700;800&display=swap');
+
+@import "tailwindcss";
+
+:root {
+  /* Core Palette */
+  --espresso: #1a1008;
+  --espresso-mid: #2a1a0e;
+  --coffee-brown: #4a2c17;
+  --copper: #b87333;
+  --copper-soft: #d9a86c;
+  --gold: #c9a84c;
+  --ivory: #f5f0e8;
+  --cream: #faf7f2;
+  --highland-green: #3d5c3a;
+  --olive: #6b7c5a;
+  --earth: #8b6340;
+  --clay: #c4956a;
+  --mist: #e8e0d0;
+
+  /* Light minimal palette */
+  --paper: #fdfcfa;
+  --stone: #f2efe9;
+  --line: rgba(26, 16, 8, 0.08);
+  --line-soft: rgba(26, 16, 8, 0.05);
+  --ink: #20150c;
+  --ink-70: rgba(32, 21, 12, 0.7);
+  --ink-50: rgba(32, 21, 12, 0.5);
+  --ink-40: rgba(32, 21, 12, 0.4);
+
+  /* Typography */
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Manrope', system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--cream);
+  color: var(--espresso);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  animation: pageFadeIn 1.2s ease-out forwards;
+}
+
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* Grain texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--ivory);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--copper);
+  border-radius: 3px;
+}
+
+/* Selection */
+::selection {
+  background: var(--copper);
+  color: var(--ivory);
+}
+
+/* ── Typography utilities ── */
+.font-serif { font-family: var(--font-serif); }
+.font-sans  { font-family: var(--font-sans); }
+
+/* ── Eyebrow / Label text ── */
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--copper);
+}
+
+/* ── Section headings ── */
+.section-heading {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+/* ── Thin horizontal rule ── */
+.rule {
+  width: 3rem;
+  height: 1px;
+  background: var(--copper);
+  display: block;
+}
+
+/* ── Animated underline link ── */
+.link-underline {
+  position: relative;
+  display: inline-block;
+}
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.4s ease;
+}
+.link-underline:hover::after {
+  width: 100%;
+}
+
+/* ── Buttons ── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background: var(--espresso);
+  color: var(--ivory);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid var(--espresso);
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn-primary:hover {
+  background: transparent;
+  color: var(--espresso);
+}
+.btn-primary.light {
+  background: var(--ivory);
+  color: var(--espresso);
+  border-color: var(--ivory);
+}
+.btn-primary.light:hover {
+  background: transparent;
+  color: var(--ivory);
+}
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background: transparent;
+  color: var(--espresso);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid var(--espresso);
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn-outline:hover {
+  background: var(--espresso);
+  color: var(--ivory);
+}
+.btn-outline.light {
+  color: var(--ivory);
+  border-color: var(--ivory);
+}
+.btn-outline.light:hover {
+  background: var(--ivory);
+  color: var(--espresso);
+}
+.btn-copper {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background: var(--copper);
+  color: var(--ivory);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid var(--copper);
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn-copper:hover {
+  background: transparent;
+  color: var(--copper);
+}
+
+/* ── Image reveal effect ── */
+.img-reveal {
+  overflow: hidden;
+}
+.img-reveal img {
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.img-reveal:hover img {
+  transform: scale(1.05);
+}
+
+/* ── Contour lines background motif ── */
+.contour-bg {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Cellipse cx='200' cy='150' rx='180' ry='120' fill='none' stroke='%23b87333' stroke-width='0.5' opacity='0.15'/%3E%3Cellipse cx='200' cy='150' rx='145' ry='90' fill='none' stroke='%23b87333' stroke-width='0.5' opacity='0.15'/%3E%3Cellipse cx='200' cy='150' rx='110' ry='62' fill='none' stroke='%23b87333' stroke-width='0.5' opacity='0.15'/%3E%3Cellipse cx='200' cy='150' rx='76' ry='38' fill='none' stroke='%23b87333' stroke-width='0.5' opacity='0.15'/%3E%3Cellipse cx='200' cy='150' rx='42' ry='18' fill='none' stroke='%23b87333' stroke-width='0.5' opacity='0.15'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 500px;
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ══════════════════════════════════════════
+   Light minimal system — shared utilities
+   ══════════════════════════════════════════ */
+
+.section-light { background: var(--paper); }
+.section-stone { background: var(--stone); }
+
+.wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Hairline card */
+.card-light {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-light:hover {
+  border-color: rgba(26, 16, 8, 0.18);
+  box-shadow: 0 24px 48px -24px rgba(26, 16, 8, 0.15);
+}
+
+/* Soft chip */
+.chip-light {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--coffee-brown);
+  background: var(--stone);
+  border: 1px solid var(--line);
+  border-radius: 9999px;
+  padding: 0.3rem 0.8rem;
+}
+
+/* Quiet divider line */
+.divider {
+  height: 1px;
+  width: 100%;
+  background: var(--line);
+}
+
+/* Round icon button */
+.icon-orb {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  border: 1px solid var(--line);
+  color: var(--espresso);
+  background: transparent;
+  transition: all 0.3s ease;
+}
+.icon-orb:hover {
+  background: var(--espresso);
+  border-color: var(--espresso);
+  color: var(--ivory);
+}
+
+/* Text arrow link */
+.arrow-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--espresso);
+  text-decoration: none;
+}
+.arrow-link svg {
+  transition: transform 0.3s ease;
+}
+.arrow-link:hover svg {
+  transform: translate(3px, -3px);
+}
+
+/* Rotating circular badge (CSS-only) */
+.orbit-badge {
+  position: absolute;
+  z-index: 2;
+  width: 7rem;
+  height: 7rem;
+  pointer-events: none;
+}
+.orbit-badge svg {
+  width: 100%;
+  height: 100%;
+  animation: orbitSpin 22s linear infinite;
+}
+.orbit-badge text {
+  font-family: var(--font-sans);
+  font-size: 8.2px;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  fill: var(--espresso);
+}
+@keyframes orbitSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Footer social orbs */
+.footer-social {
+  transition: all 0.3s ease;
+}
+.footer-social:hover {
+  background: var(--copper);
+  border-color: var(--copper) !important;
+  color: var(--espresso);
+}
+
+/* Gentle rise on hover for media frames */
+.frame {
+  overflow: hidden;
+  border-radius: 16px;
+}
+.frame img {
+  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.frame:hover img {
+  transform: scale(1.04);
+}
+
+/* ── Focus visible ── */
+:focus-visible {
+  outline: 2px solid var(--copper);
+  outline-offset: 3px;
+}
+
+/* ══════════════════════════════════════
+   Mobile responsiveness
+   ══════════════════════════════════════ */
+
+/* Page heroes need extra top padding on mobile:
+   the navbar wraps to two rows below 860px */
+@media (max-width: 860px) {
+  .page-hero {
+    padding-top: 12.5rem !important;
+  }
+}
+@media (max-width: 480px) {
+  .page-hero {
+    padding-top: 11.5rem !important;
+  }
+}
+
+/* Tighter side padding on small phones */
+@media (max-width: 480px) {
+  section {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
+}
+
+/* Prevent iOS zoom-on-focus: 16px minimum for form fields on phones */
+@media (max-width: 640px) {
+  .contact-card input,
+  .contact-card select,
+  .contact-card textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* Floating CTA on phones */
+@media (max-width: 640px) {
+  .floating-cta {
+    right: 1rem !important;
+    bottom: 1rem !important;
+    padding: 0.75rem 1.1rem !important;
+  }
+}
